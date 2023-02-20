@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculadora</title>
+  </head>
+  <body>
+    <h1>Calculadora</h1>
+    <input type="text" id="resultado" readonly>
+    <br>
+    <button onclick="adicionarNumero('1')">1</button>
+    <button onclick="adicionarNumero('2')">2</button>
+    <button onclick="adicionarNumero('3')">3</button>
+    <button onclick="adicionarOperador('+')">+</button>
+    <br>
+    <button onclick="adicionarNumero('4')">4</button>
+    <button onclick="adicionarNumero('5')">5</button>
+    <button onclick="adicionarNumero('6')">6</button>
+    <button onclick="adicionarOperador('-')">-</button>
+    <br>
+    <button onclick="adicionarNumero('7')">7</button>
+    <button onclick="adicionarNumero('8')">8</button>
+    <button onclick="adicionarNumero('9')">9</button>
+    <button onclick="adicionarOperador('*')">*</button>
+    <br>
+    <button onclick="adicionarNumero('0')">0</button>
+    <button onclick="adicionarOperador('/')">/</button>
+    <button onclick="calcularResultado()">=</button>
+    <button onclick="limpar()">C</button>
+    <script>
+      let operador = '';
+      let numero1 = '';
+      let numero2 = '';
+      let resultadoElement = document.getElementById('resultado');
+
+      function adicionarNumero(numero) {
+        if (operador === '') {
+          numero1 += numero;
+          resultadoElement.value = numero1;
+        } else {
+          numero2 += numero;
+          resultadoElement.value = numero2;
+        }
+      }
+
+      function adicionarOperador(novoOperador) {
+        if (numero1 === '') {
+          return;
+        }
+        operador = novoOperador;
+        resultadoElement.value = operador;
+      }
+
+      function calcularResultado() {
+        if (numero1 === '' || numero2 === '' || operador === '') {
+          return;
+        }
+        let num1 = parseFloat(numero1);
+        let num2 = parseFloat(numero2);
+        let resultado = 0;
+        switch (operador) {
+          case '+':
+            resultado = num1 + num2;
+            break;
+          case '-':
+            resultado = num1 - num2;
+            break;
+          case '*':
+            resultado = num1 * num2;
+            break;
+          case '/':
+            resultado = num1 / num2;
+            break;
+          default:
+            resultado = 0;
+        }
+        resultadoElement.value = resultado;
+        numero1 = resultado.toString();
+        numero2 = '';
+        operador = '';
+      }
+
+      function limpar() {
+        numero1 = '';
+        numero2 = '';
+        operador = '';
+        resultadoElement.value = '';
+      }
+    </script>
+  </body>
+</html>
+
+  
